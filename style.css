@@ -17,7 +17,8 @@ body{
     background-image: url(images/background.png);
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    /* background-attachment: fixed can cause the background to disappear on some mobile browsers */
+    background-attachment: scroll;
 }
 .container{
     padding: 10px 10%;
@@ -328,8 +329,13 @@ nav .fas{
 }
 
 @media only screen and (max-width: 600px){
+    /* Use the same background on phones (or provide a phone-specific image if you add one) */
     #header{
-        background-image: url(images/phone-background.png);
+        /* prefer a phone-optimized image if present, otherwise fall back to the full background */
+        background-image: url(images/phone-background.png), url(images/background.png);
+        background-attachment: scroll;
+        background-position: center;
+        background-size: cover;
     }
     .header-text{
         margin-top: 100%;
@@ -390,4 +396,11 @@ nav .fas{
     color: #61b752;
     margin-top: -40px;
     display: block;
+}
+/* **************************************************/
+/* Enable fixed attachment only on wider screens */
+@media only screen and (min-width: 601px){
+    #header{
+        background-attachment: fixed;
+    }
 }
